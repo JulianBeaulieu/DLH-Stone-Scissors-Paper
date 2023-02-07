@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sspbackend.model.Employee;
 import com.sspbackend.model.Game;
 import com.sspbackend.model.Leader;
-import com.sspbackend.model.User;
+import com.sspbackend.model.AppUser;
 import com.sspbackend.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -40,12 +40,12 @@ public class UserController {
 
 	@GetMapping(path = "/user", produces = "application/json")
 	public Leader getUser(@RequestParam String username) {
-		User temp = userService.getUser(username);
+		AppUser temp = userService.getUser(username);
 		return new Leader(temp.getUsername(), temp.getScore());
 	}	
 
-	@PostMapping("/users")
-	public void create(@RequestBody User user) {
+	@GetMapping("/users")
+	public void create(@RequestBody AppUser user) {
 		this.userService.createNewUser(user);;
 	}
 }

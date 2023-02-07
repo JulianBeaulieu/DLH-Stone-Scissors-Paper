@@ -2,7 +2,10 @@ package com.sspbackend.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,13 +14,13 @@ import lombok.NoArgsConstructor;
 @Data 
 @NoArgsConstructor 
 @AllArgsConstructor
-public class User implements Serializable{
+public class AppUser implements Serializable{
     private String username;
     private String password;
     private List<Game> games;
     private int score;
 
-    public User(String newUsername, String newPassword){
+    public AppUser(String newUsername, String newPassword){
         username = newUsername;
         password = newPassword;
         games = new ArrayList<>();

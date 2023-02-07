@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.Set;
 
 public class Database {
-    private HashMap<String, User> database = null;
+    private HashMap<String, AppUser> database = null;
 
     public Database(){
         database = FileIO.loadDB();
     }
 
-    public Database(HashMap<String, User> newDatabase){
+    public Database(HashMap<String, AppUser> newDatabase){
         database = newDatabase;
     }
 
-    public User getUser(String userName){
+    public AppUser getUser(String userName){
         return database.get(userName);
     }
 
@@ -30,7 +30,7 @@ public class Database {
         List<Leader> leaderboard = new ArrayList<>();
         
         while (i.hasNext()) {
-            User temp = (User) i.next();
+            AppUser temp = (AppUser) i.next();
             leaderboard.add(new Leader(temp.getUsername(), temp.getScore()));
         }
 
@@ -39,7 +39,7 @@ public class Database {
         return leaderboard;
     }
 
-    public void setUser(String userName, User newUser){
+    public void setUser(String userName, AppUser newUser){
         database.put(userName, newUser);
         FileIO.saveData(database);
     }

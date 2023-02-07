@@ -1,16 +1,12 @@
 package com.sspbackend.model;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.sspbackend.model.AppUser;
 
 import java.util.Map.Entry;
 
@@ -23,7 +19,7 @@ import java.util.Map.Entry;
 public class FileIO {
   private static final String BINARYFILEMATRIXFILEPATH = "resources/db.dat";
 
-  public static HashMap<String, User> loadDB()
+  public static HashMap<String, AppUser> loadDB()
   {
     File binaryDataFile = new File(BINARYFILEMATRIXFILEPATH);
 
@@ -33,7 +29,9 @@ public class FileIO {
     }
     else
     {
-      return new HashMap<String, User>();
+      HashMap<String, AppUser> map = new HashMap<>();
+      map.put("root", new AppUser("root", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6"));
+      return map;
     }
   }
 
@@ -41,7 +39,7 @@ public class FileIO {
    *
    * @return An array of LinkedLists containing the Edges which are the vertices of the graph
    */
-  private static HashMap<String, User> loadDataFromBinaryFile(String filePath)
+  private static HashMap<String, AppUser> loadDataFromBinaryFile(String filePath)
   {
     Data data = null;
 
@@ -60,14 +58,14 @@ public class FileIO {
       //e.printStackTrace();
 
       //in the case that the file is somehow corrupted, it will try to load the graph from the binary file
-      return new HashMap<String, User>();
+      return new HashMap<String, AppUser>();
     }
     catch(ClassNotFoundException e)
     {
       //e.printStackTrace();
 
       //in the case that the file is somehow corrupted, it will try to load the graph from the binary file
-      return new HashMap<String, User>();
+      return new HashMap<String, AppUser>();
     }
 
     //returns the graph which the matrix object holds
@@ -78,7 +76,7 @@ public class FileIO {
   /*########################## File Output #############################*/
   /*####################################################################*/
 
-  public static void saveData(HashMap<String, User> data)
+  public static void saveData(HashMap<String, AppUser> data)
   {
     File myObj = new File("db.dat"); 
     if (myObj.delete()) { 
@@ -111,13 +109,13 @@ public class FileIO {
   @NoArgsConstructor 
   @AllArgsConstructor
   private static class Data implements Serializable {
-    private HashMap<String, User> data = null;
+    private HashMap<String, AppUser> data = null;
 
-    public HashMap<String, User> getData() {
+    public HashMap<String, AppUser> getData() {
       return data;
     }
 
-    public void setData(HashMap<String, User> data) {
+    public void setData(HashMap<String, AppUser> data) {
       this.data = data;
     }
   }
