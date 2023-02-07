@@ -31,4 +31,8 @@ public class UserService {
     public void createNewUser(String username, String password){
         db.setUser(username, new User(username, password));
     }
+
+    public void createNewUser(User user){
+        db.setUser(user.getUsername(), user);
+    }
 }

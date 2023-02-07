@@ -15,42 +15,17 @@
   
   </header> -->
 <header>
-  <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-2">
-    <div class="flex grow items-center text-white mr-6">
-      <span class="font-semibold text-xl tracking-tight">Stone Scissors Paper</span>
+  <nav class="sticky top-0 z-50 flex bg-blue-500 p-3">
+    <div class="flex grow text-white">
+      <span class="font-semibold text-xl">Stone Scissors Paper</span>
     </div>
-    <div class="lg:flex lg:items-center lg:w-auto">
-      <!-- <div class="grow"></div> -->
-      <div>
-        <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login"  class="inline-block 
-                            text-sm 
-                            px-4 
-                            py-2 
-                            leading-none 
-                            border 
-                            rounded 
-                            text-white 
-                            border-white 
-                            hover:border-transparent 
-                            hover:text-teal-500 
-                            hover:bg-white 
-                            ">Sign In</a>
-        <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" 
-            class="inline-block 
-                    text-sm 
-                    px-4 
-                    py-2 
-                    leading-none 
-                    border 
-                    rounded 
-                    text-white 
-                    border-white 
-                    hover:border-transparent 
-                    hover:text-teal-500 
-                    hover:bg-white 
-                    "
-            >Sign Out</a>
-      </div>
+    <div class="lg:flex lg:w-auto">
+      <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white ">
+        Sign In
+      </a>
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
+        Sign Out
+      </a>
     </div>
   </nav>
 </header>

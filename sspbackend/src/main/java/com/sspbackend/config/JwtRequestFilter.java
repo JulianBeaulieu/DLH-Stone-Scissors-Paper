@@ -1,6 +1,7 @@
 package com.sspbackend.config;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,7 +19,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.sspbackend.service.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
@@ -36,6 +39,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		String username = null;
 		String jwtToken = null;
+
+		Iterator it = request.getHeaderNames().asIterator();
+		while(it.hasNext()){
+			String key = (String) it.next();
+			log.info("Request contains: " + key + ":" + request.getHeader(key));
+		}
+		log.info("\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n");
+		
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 			jwtToken = requestTokenHeader.substring(7);

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "localhost:8080", maxAge = 3600)
+@CrossOrigin()
+@RequestMapping({ "game" })
 public class GameController {
     private UserService userService;
 
@@ -23,7 +25,7 @@ public class GameController {
     }
     
     @CrossOrigin("*")
-    @GetMapping("game/playGame")
+    @GetMapping("/playGame")
     public Game getPlayGame(@RequestParam String playerChoice){
         log.info("Playing new game. User chose: " + playerChoice);
         String[] options = {"stone", "scissors", "paper"};

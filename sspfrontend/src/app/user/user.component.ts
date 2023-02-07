@@ -21,17 +21,8 @@ export class UserComponent implements OnInit {
      );
   }
 
-handleSuccessfulResponse(response)
-{
-    this.users=response;
-}
-
-deleteUser(user: User): void {
-   this.httpClientService.deleteUser(user)
-     .subscribe( data => {
-      this.users = this.users.filter(u => u !== user);
-   })
-};
-
-
+  handleSuccessfulResponse(response)
+  {
+      this.users=response;
+  }
 }
