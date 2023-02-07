@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
   <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
   <div><a href="https://www.javainuse.com" class="navbar-brand">JavaInUse</a></div>
   
@@ -13,4 +13,52 @@
   
   </nav>
   
-  </header>
+  </header> -->
+<header>
+  <nav class="flex items-center justify-between flex-wrap bg-indigo-900 p-2">
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+      <span class="font-semibold text-xl tracking-tight">Stone Scissors Paper</span>
+    </div>
+    <div class="block lg:hidden">
+      <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+          <title>
+            Menu
+          </title>
+      </button>
+    </div>
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      <div class="lg:flex-grow">
+      </div>
+      <div>
+        <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login"  class="inline-block 
+                            text-sm 
+                            px-4 
+                            py-2 
+                            leading-none 
+                            border 
+                            rounded 
+                            text-white 
+                            border-white 
+                            hover:border-transparent 
+                            hover:text-teal-500 
+                            hover:bg-white 
+                            lg:mt-0">Sign In</a>
+        <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" 
+            class="inline-block 
+                    text-sm 
+                    px-4 
+                    py-2 
+                    leading-none 
+                    border 
+                    rounded 
+                    text-white 
+                    border-white 
+                    hover:border-transparent 
+                    hover:text-teal-500 
+                    hover:bg-white 
+                    lg:mt-0"
+            >Sign Out</a>
+      </div>
+    </div>
+  </nav>
+</header>
