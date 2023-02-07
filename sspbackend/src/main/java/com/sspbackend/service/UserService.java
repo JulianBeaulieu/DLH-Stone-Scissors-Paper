@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sspbackend.model.Database;
+import com.sspbackend.model.Game;
 import com.sspbackend.model.Leader;
 import com.sspbackend.model.AppUser;
 
@@ -36,6 +37,10 @@ public class UserService implements UserDetailsService{
 
     public AppUser getUser(String username){
         return db.getUser(username);
+    }
+
+    public void updateUserScore(String username, Game game){
+        db.addGameToUser(username, game);
     }
 
     public List<Leader> getLeaderboard(){

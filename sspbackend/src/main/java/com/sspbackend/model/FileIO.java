@@ -77,18 +77,11 @@ public class FileIO {
   /*####################################################################*/
 
   public static void saveData(HashMap<String, AppUser> data)
-  {
-    File myObj = new File("db.dat"); 
-    if (myObj.delete()) { 
-      System.out.println("Deleted the file: " + myObj.getName());
-    } else {
-      System.out.println("Failed to delete the file.");
-    } 
-    
+  {   
     try
     {
       //tries to make a file
-      ObjectOutputStream fileOutput = new ObjectOutputStream(new FileOutputStream(BINARYFILEMATRIXFILEPATH));
+      ObjectOutputStream fileOutput = new ObjectOutputStream(new FileOutputStream(BINARYFILEMATRIXFILEPATH, false));
       
       Data temp = new Data(data);
       //saves a matrix object to the file

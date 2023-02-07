@@ -26,7 +26,35 @@ public class GameController {
     
     @CrossOrigin("*")
     @GetMapping("/playGame")
-    public Game getPlayGame(@RequestParam String playerChoice){
+    public Game getPlayGame(@RequestParam String username, @RequestParam String playerChoice){
+        log.info("Playing new game. User chose: " + playerChoice);
+        String[] options = {"stone", "scissors", "paper"};
+        Random rand = new Random();
+        String computerChoice = options[rand.nextInt(options.length)];
+        log.info("Computer chose: " + computerChoice);
+
+        int outcome = -100;
+
+        if(playerChoice.equals(computerChoice)){
+            outcome = 1;
+        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scissors")) ||
+                    (playerChoice.equals("scissors") && computerChoice.equals("paper"))    ||
+                    (playerChoice.equals("paper")    && computerChoice.equals("stone"))   ){
+            outcome = 2;
+        } else {
+            outcome = 0;
+        }
+
+        log.info("Outcome of the game: " + outcome + "\n\n");
+        Game tempGame = new Game(playerChoice, computerChoice, outcome);
+        this.userService.updateUserScore(username, tempGame);
+
+        return tempGame;
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("/playGameAnonymous")
+    public Game playGame(@RequestParam String playerChoice){
         log.info("Playing new game. User chose: " + playerChoice);
         String[] options = {"stone", "scissors", "paper"};
         Random rand = new Random();
