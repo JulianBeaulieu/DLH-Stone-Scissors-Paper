@@ -9,8 +9,6 @@
             </button> -->
             <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"  id="leaderboard" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Leaderboard</button>
             <div class="flex grow"></div>
-            <!-- <div class="card">
-              <div class="card-content flex px-3 py-2"> -->
             <div class="rounded-lg flex px-3 py-2 dark:bg-gray-800 ">
                 <div class="spinningasset coin is-sm">
                   <div>
@@ -34,22 +32,41 @@
                 <div class="text-white">
                  {{user.score}}
                 </div>
-              <!-- </div> -->
             </div>
           </div>
         
           <div class="">
             <div class="animation-container">
-              <div id="rightFist" class="paused animation rightFist">👍</div>
+              <div id="rightFist" class="paused animation rightFist">
+                <div class="rotate-emoji-270">
+                  <div id="rightFistEmoji" class="mirror-emoji large-fist">
+                    ✊
+                  </div>
+                </div>
+              </div>
               <div class="flex grow"></div>
-              <div id="leftFist" class="paused animation leftFist">👍</div>
+              <div id="leftFist" class="paused animation leftFist">
+                <div id="leftFistEmoji" class="rotate-emoji-270 large-fist">
+                  ✊
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="inline-flex rounded-md shadow-sm">       
-            <button id="stone" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Stone</button>
-            <button id="scissor" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Scissor</button>
-            <button id="paper" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Paper</button>
+            <button id="stone" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+              <div class="rotate-emoji-270">
+                ✊
+              </div>
+            </button>
+            <button id="scissor" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+              <div class="rotate-emoji-270">
+                ✌️
+              </div>
+            </button>
+            <button id="paper" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+              🫲
+            </button>
           </div>
         </div>
       </div>
