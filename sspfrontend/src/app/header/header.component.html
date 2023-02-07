@@ -1,29 +1,14 @@
-<!-- <header>
-  <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
-  <div><a href="https://www.javainuse.com" class="navbar-brand">JavaInUse</a></div>
-  
-  <ul class="navbar-nav">
-    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">View Users</a></li>
-    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/adduser" class="nav-link">Add New User</a></li>
-    <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
-    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
-  
-  
-  </ul>
-  
-  </nav>
-  
-  </header> -->
+
 <header>
   <nav class="sticky top-0 z-50 flex bg-blue-500 p-3">
     <div class="flex grow text-white">
       <span class="font-semibold text-xl">Stone Scissors Paper</span>
     </div>
     <div class="lg:flex lg:w-auto">
-      <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white ">
+      <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-blue-600 ">
         Sign In
       </a>
-      <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
+      <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-blue-600">
         Sign Out
       </a>
     </div>

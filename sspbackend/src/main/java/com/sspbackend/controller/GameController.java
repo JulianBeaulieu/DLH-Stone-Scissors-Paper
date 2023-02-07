@@ -46,8 +46,9 @@ public class GameController {
         }
 
         log.info("Outcome of the game: " + outcome + "\n\n");
-        Game tempGame = new Game(playerChoice, computerChoice, outcome);
-        this.userService.updateUserScore(username, tempGame);
+        Game tempGame = new Game(playerChoice, computerChoice, outcome, -1);
+        int newScore = this.userService.updateUserScore(username, tempGame);
+        tempGame.setNewUserScore(newScore);
 
         return tempGame;
     }
@@ -75,6 +76,6 @@ public class GameController {
 
         log.info("Outcome of the game: " + outcome + "\n\n");
 
-        return new Game(playerChoice, computerChoice, outcome);
+        return new Game(playerChoice, computerChoice, outcome, -1);
     }
 }

@@ -18,9 +18,8 @@ public class LeaderBoardController {
         this.userService = userService;
     }
 
-    @CrossOrigin("*")
-    @GetMapping("/game/getLeaderboard")
-    public List<Leader> getLeaderboard(){
-        return userService.getLeaderboard();
-    }
+    @GetMapping(path = "/leaderboard", produces = "application/json")
+	public List<Leader> leaderboard() {
+		return userService.getLeaderboard();
+	}
 }

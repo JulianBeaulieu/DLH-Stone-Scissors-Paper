@@ -38,7 +38,7 @@ public class AppUser implements Serializable{
     }
 
     public void addGame(String playerChoice, String computerChoice, int outcome){
-        Game game = new Game(playerChoice, computerChoice, outcome);
+        Game game = new Game(playerChoice, computerChoice, outcome, -1);
         games.add(game);
     
         if(game.getOutcome() == 1){

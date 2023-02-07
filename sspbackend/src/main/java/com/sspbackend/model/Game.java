@@ -13,4 +13,5 @@ public class Game implements Serializable{
     private String userChoice;
     private String computerChoice;
     private int outcome;
+    private int newUserScore;
 }

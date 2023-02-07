@@ -19,46 +19,51 @@ export class HttpClientService {
     private httpClient:HttpClient
   ) {}
 
-     
-
   public getUsers() {
     const headers = new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
 
     return this.httpClient.get<any>('http://localhost:8080/users',{headers}).pipe(
        map(
          userData => {
-          console.log("\n\n\n\n\n", userData, "\n\n\n\n")
           return userData;
          }
        )
       );
   }
 
-  public getUser(user) {
+  public getUser(username) {    
     const headers = new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
 
-    return this.httpClient.get<any>('http://localhost:8080/user?username=' + user.name ,{headers}).pipe(
+    return this.httpClient.get<any>('http://localhost:8080/retrieveUser?username=' + username ,{headers}).pipe(
        map(
          data => {
-          console.log("\n\n\n\n\n", data, "\n\n\n\n");
-          let u = new User(data['username'], data['score'])
-          console.log(u);
-          return u;
+          return new User(data['username'], data['score']);
          }
        )
       );
   }
 
-  public playGame(choice:string) {
+  public playGame(username, choice:string) {
     const headers = new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
 
-    return this.httpClient.get<any>('http://localhost:8080/game/playGame?playerChoice='+ choice,{headers}).pipe(
+    return this.httpClient.get<any>('http://localhost:8080/game/playGame?username=' + username +'&playerChoice='+ choice,{headers}).pipe(
        map(
          data => {
-          console.log("\n\n\n\n\n", data, "\n\n\n\n");
-          let g = new Game(data['userChoice'], data['computerChoice'], data['outcome'])
-          console.log(g);
-          return g;
+          return new Game(data['userChoice'], data['computerChoice'], data['outcome'], data['newUserScore']);
+         }
+       )
+      );
+
+    // return this.httpClient.get<Game>('http://localhost:8080/game/playGame?playerChoice='+ encodeURIComponent( JSON.stringify(choice)),{headers});
+  }
+
+  public playGameAnonymous(choice:string) {
+    const headers = new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
+
+    return this.httpClient.get<any>('http://localhost:8080/game/playGameAnonymous?playerChoice='+ choice,{headers}).pipe(
+       map(
+         data => {
+          return new Game(data['userChoice'], data['computerChoice'], data['outcome'], data['newUserScore']);
          }
        )
       );

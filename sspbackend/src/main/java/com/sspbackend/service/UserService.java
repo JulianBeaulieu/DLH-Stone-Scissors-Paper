@@ -26,12 +26,12 @@ public class UserService implements UserDetailsService{
 
     @Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser tempUser = db.getUser(username);
-        db.getUser(username);
-		if ("root".equals(username)) {
-			return new User(tempUser.getUsername(), tempUser.getPassword(), new ArrayList<>());
+		if (username == null || !"root".equals(username)) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
 		} else {
-			throw new UsernameNotFoundException("User not found with username: " + username);
+            AppUser tempUser = db.getUser(username);
+            db.getUser(username);
+			return new User(tempUser.getUsername(), tempUser.getPassword(), new ArrayList<>());
 		}
 	}
 
@@ -39,8 +39,8 @@ public class UserService implements UserDetailsService{
         return db.getUser(username);
     }
 
-    public void updateUserScore(String username, Game game){
-        db.addGameToUser(username, game);
+    public int updateUserScore(String username, Game game){
+       return db.addGameToUser(username, game);
     }
 
     public List<Leader> getLeaderboard(){

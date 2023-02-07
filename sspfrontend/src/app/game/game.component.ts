@@ -6,6 +6,7 @@ export class Game{
     public userChoice:string,
     public computerChoice:string,
     public outcome:string,
+    public newScore:string,
   ) {}
 }
 
@@ -15,6 +16,8 @@ export class User{
     public score:string,
   ) {}
 }
+
+
 
 @Component({
   selector: 'app-game',
@@ -39,23 +42,24 @@ export class GameComponent implements OnInit {
   }
 
   playGame(choice:string):void {
-    this.httpClientService.playGame(choice).subscribe(
-      response =>console.log(response),
+    this.httpClientService.playGame(this.user.name, choice).subscribe(
+      response => this.handleSuccessfulGameResponse(response),
      );
   }
 
   handleSuccessfulUserResponse(response:User){
       this.user=response;
-      console.log("New Score: ", this.user.score);
-      
   }
 
   handleSuccessfulGameResponse(response:Game){
       this.game=response;
+      this.user.score = response.newScore;      
       this.updateUser();
   }
 
   ngOnInit() {
+    this.user = new User(sessionStorage.getItem('username'), "0");
+    this.updateUser();
     const rightFist = document.getElementById('rightFist');
     const leftFist = document.getElementById('leftFist');
     const stoneButton = document.getElementById('stone');
@@ -66,27 +70,24 @@ export class GameComponent implements OnInit {
     let leftIterationCount = 0;
 
     rightFist.addEventListener('animationstart', () => {
-      console.log('rightFist animation started');
+      // console.log('rightFist animation started');
     });
 
     leftFist.addEventListener('animationstart', () => {
-      console.log('leftFist animation started');
+      // console.log('leftFist animation started');
     });
 
     rightFist.addEventListener('animationend', () => {
-      console.log('rightFist animation ended');
       rightFist.classList.remove('active');
     });
 
     leftFist.addEventListener('animationend', () => {
-      console.log('leftFist animation ended');
       leftFist.classList.remove('active');
     });
 
     stoneButton.addEventListener('click', () => {
       if(!active){
-        console.log(rightFist.classList);
-        console.log(leftFist.classList);
+        active = active ? false : true;
         
         rightFist.classList.add('active');
         leftFist.classList.add('active');
@@ -96,15 +97,14 @@ export class GameComponent implements OnInit {
 
         stoneButton.classList.toggle("active");
         this.playGame("stone");
-        console.log("Game Results: ", this.game);
         stoneButton.classList.toggle("active");
+        active = active ? false : true;
       }
     });
 
     scissorButton.addEventListener('click', () => {
       if(!active){
-        console.log(rightFist.classList);
-        console.log(leftFist.classList);
+        active = active ? false : true;
         
         rightFist.classList.add('active');
         leftFist.classList.add('active');
@@ -114,15 +114,14 @@ export class GameComponent implements OnInit {
 
         scissorButton.classList.toggle("active");
         this.playGame("scissor");
-        console.log("Game Results: ", this.game);
         scissorButton.classList.toggle("active");
+        active = active ? false : true;
       }
     });
 
     paperButton.addEventListener('click', () => {
       if(!active){
-        console.log(rightFist.classList);
-        console.log(leftFist.classList);
+        active = active ? false : true;
         
         rightFist.classList.add('active');
         leftFist.classList.add('active');
@@ -132,8 +131,8 @@ export class GameComponent implements OnInit {
 
         paperButton.classList.toggle("active");
         this.playGame("paper")
-        console.log("Game Results: ", this.game);
         paperButton.classList.toggle("active");
+        active = active ? false : true;
       }
     });
   }

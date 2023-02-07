@@ -44,9 +44,12 @@ public class Database {
         FileIO.saveData(database);
     }
 
-    public void addGameToUser(String userName, Game newGame){
+    public int addGameToUser(String userName, Game newGame){
         database.get(userName).addGame(newGame);
+        int newScore = database.get(userName).getScore() + newGame.getOutcome();
+        database.get(userName).setScore(newScore);
         FileIO.saveData(database);
+        return newScore;
     }
 
     public boolean doesUserExist(String userName){
