@@ -17,8 +17,6 @@ export class User{
   ) {}
 }
 
-
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -28,6 +26,14 @@ export class GameComponent implements OnInit {
 
   user:User;
   game:Game;
+  active = false;
+  rightFist:HTMLElement;
+  leftFist:HTMLElement;
+  stoneButton:HTMLElement;
+  scissorButton:HTMLElement;
+  paperButton:HTMLElement;
+  rightIterationCount:number;
+  leftIterationCount:number;
 
   constructor(
     private httpClientService:HttpClientService
@@ -57,83 +63,60 @@ export class GameComponent implements OnInit {
       this.updateUser();
   }
 
+  addButtonEventListener(domElement, playType, interactionType){
+    domElement.addEventListener(interactionType, () => {
+      if(!this.active){
+        this.active = this.active ? false : true;
+        
+        this.rightFist.classList.add('active');
+        this.leftFist.classList.add('active');
+
+        this.rightIterationCount = 0;
+        this.leftIterationCount = 0;
+
+        domElement.classList.toggle("active");
+        this.playGame(playType);
+        domElement.classList.toggle("active");
+        this.active = this.active ? false : true;
+      }
+    });
+  }
+
   ngOnInit() {
     this.user = new User(sessionStorage.getItem('username'), "0");
     this.updateUser();
-    const rightFist = document.getElementById('rightFist');
-    const leftFist = document.getElementById('leftFist');
-    const stoneButton = document.getElementById('stone');
-    const scissorButton = document.getElementById('scissor');
-    const paperButton = document.getElementById('paper');
-    var active = false;
-    let rightIterationCount = 0;
-    let leftIterationCount = 0;
 
-    rightFist.addEventListener('animationstart', () => {
+    this.active = false;
+    this.rightFist = document.getElementById('rightFist');
+    this.leftFist = document.getElementById('leftFist');
+    this.stoneButton = document.getElementById('stone');
+    this.scissorButton = document.getElementById('scissor');
+    this.paperButton = document.getElementById('paper');
+    this.rightIterationCount = 0;
+    this.leftIterationCount = 0;
+    
+
+    this.rightFist.addEventListener('animationstart', () => {
       // console.log('rightFist animation started');
     });
 
-    leftFist.addEventListener('animationstart', () => {
+    this.leftFist.addEventListener('animationstart', () => {
       // console.log('leftFist animation started');
     });
 
-    rightFist.addEventListener('animationend', () => {
-      rightFist.classList.remove('active');
+    this.rightFist.addEventListener('animationend', () => {
+      this.rightFist.classList.remove('active');
     });
 
-    leftFist.addEventListener('animationend', () => {
-      leftFist.classList.remove('active');
+    this.leftFist.addEventListener('animationend', () => {
+      this.leftFist.classList.remove('active');
     });
 
-    stoneButton.addEventListener('click', () => {
-      if(!active){
-        active = active ? false : true;
-        
-        rightFist.classList.add('active');
-        leftFist.classList.add('active');
-
-        rightIterationCount = 0;
-        leftIterationCount = 0;
-
-        stoneButton.classList.toggle("active");
-        this.playGame("stone");
-        stoneButton.classList.toggle("active");
-        active = active ? false : true;
-      }
-    });
-
-    scissorButton.addEventListener('click', () => {
-      if(!active){
-        active = active ? false : true;
-        
-        rightFist.classList.add('active');
-        leftFist.classList.add('active');
-
-        rightIterationCount = 0;
-        leftIterationCount = 0;
-
-        scissorButton.classList.toggle("active");
-        this.playGame("scissor");
-        scissorButton.classList.toggle("active");
-        active = active ? false : true;
-      }
-    });
-
-    paperButton.addEventListener('click', () => {
-      if(!active){
-        active = active ? false : true;
-        
-        rightFist.classList.add('active');
-        leftFist.classList.add('active');
-
-        rightIterationCount = 0;
-        leftIterationCount = 0;
-
-        paperButton.classList.toggle("active");
-        this.playGame("paper")
-        paperButton.classList.toggle("active");
-        active = active ? false : true;
-      }
-    });
+    this.addButtonEventListener(this.stoneButton, "stone", 'click');
+    this.addButtonEventListener(this.stoneButton, "stone", 'tap');
+    this.addButtonEventListener(this.scissorButton, "scissor", 'click');
+    this.addButtonEventListener(this.scissorButton, "scissor", 'tap');
+    this.addButtonEventListener(this.paperButton, "paper", 'click');
+    this.addButtonEventListener(this.paperButton, "paper", 'tap');
   }
 }
