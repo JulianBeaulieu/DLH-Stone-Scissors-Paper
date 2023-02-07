@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sspbackend.config.JwtTokenUtil;
 import com.sspbackend.model.JwtRequest;
 import com.sspbackend.model.JwtResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
@@ -37,13 +39,17 @@ public class JwtAuthenticationController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
 			throws Exception {
 
+		log.info("Here1 " + authenticationRequest.getUsername() + " " + authenticationRequest.getPassword());
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
+		log.info("Here2 " + authenticationRequest.getUsername() + " " +  authenticationRequest.getPassword());
 		final UserDetails userDetails = jwtInMemoryUserDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
 
+		log.info("Here3 " + authenticationRequest.getUsername() + " " + authenticationRequest.getPassword());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-
+		
+		log.info("Token " + authenticationRequest.getUsername() + " " + authenticationRequest.getPassword());
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
@@ -52,7 +58,9 @@ public class JwtAuthenticationController {
 		Objects.requireNonNull(password);
 
 		try {
+			log.error("There1");
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			log.error("There2");
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {

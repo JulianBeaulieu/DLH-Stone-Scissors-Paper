@@ -10,6 +10,8 @@ export class User{
   ) {}
 }
 
+const saltRounds = 10;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,10 +24,14 @@ export class HttpClientService {
   public getUsers() {
     const headers = new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
 
-    return this.httpClient.get<any>('http://localhost:8080/users',{headers}).pipe(
+    return this.httpClient.get<any>('http://localhost:8080/leaderboard',{headers}).pipe(
        map(
-         userData => {
-          return userData;
+         userData => {          
+          let newUserArray = [];
+          for (let i = 0; i < userData.length; i++) {
+            newUserArray.push(new User(userData[i]['username'], userData[i]['score']));
+          }
+          return newUserArray;
          }
        )
       );
@@ -53,8 +59,6 @@ export class HttpClientService {
          }
        )
       );
-
-    // return this.httpClient.get<Game>('http://localhost:8080/game/playGame?playerChoice='+ encodeURIComponent( JSON.stringify(choice)),{headers});
   }
 
   public playGameAnonymous(choice:string) {
@@ -67,15 +71,10 @@ export class HttpClientService {
          }
        )
       );
-
-    // return this.httpClient.get<Game>('http://localhost:8080/game/playGame?playerChoice='+ encodeURIComponent( JSON.stringify(choice)),{headers});
   }
 
-  public createUser(user) {
-    let username=''
-    let password=''
-  
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.post<User>("http://localhost:8080/users", user,{headers});
+  public createUser(username:string, password:string) {
+    const headers = new HttpHeaders();
+    return this.httpClient.post<User>("http://localhost:8080/createUser?username=" + username + "&password=" + password,{headers});
   }
 }

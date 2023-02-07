@@ -9,29 +9,35 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  username = ''
-  password = ''
-  invalidLogin = false
+  username:string;
+  password:string;
+  invalidLogin:boolean;
 
-  constructor(private router: Router,
-    private loginservice: AuthenticationService) { }
+  constructor(
+    private router: Router,
+    private loginservice: AuthenticationService
+  ) { }
 
   ngOnInit() {
+    this.username = "";
+    this.password = "";
+    this.invalidLogin = false;
   }
 
   checkLogin() {
     (this.loginservice.authenticate(this.username, this.password).subscribe(
       data => {
+        console.log("Success", this.username, this.password, data);
         this.router.navigate([''])
-        this.invalidLogin = false
+        this.invalidLogin = false;
       },
       error => {
-        this.invalidLogin = true
+        console.log("Failure", this.username, this.password, error);
+        this.invalidLogin = true;
 
       }
     )
     );
-
   }
 
 }

@@ -40,11 +40,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		String username = null;
 		String jwtToken = null;
 
-		Iterator it = request.getHeaderNames().asIterator();
-		while(it.hasNext()){
-			String key = (String) it.next();
-			log.info("Request contains: " + key + ":" + request.getHeader(key));
-		}
+		// Iterator it = request.getHeaderNames().asIterator();
+		// while(it.hasNext()){
+		// 	String key = (String) it.next();
+		// 	log.info("Request contains: " + key + ":" + request.getHeader(key));
+		// }
 		log.info("\n\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n");
 		
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token

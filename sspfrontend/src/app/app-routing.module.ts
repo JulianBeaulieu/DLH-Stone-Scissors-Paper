@@ -8,9 +8,8 @@ import { AuthGaurdService } from './service/auth-gaurd.service';
 import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
-  // { path: '', component: UserComponent,canActivate:[AuthGaurdService] },
   { path: '', component: GameComponent,canActivate:[AuthGaurdService] },
-  // { path: 'adduser', component: AddUserComponent,canActivate:[AuthGaurdService]},
+  { path: 'adduser', component: AddUserComponent},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent,canActivate:[AuthGaurdService] },
 ];

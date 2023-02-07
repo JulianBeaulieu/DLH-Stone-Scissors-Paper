@@ -15,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class UserService implements UserDetailsService{
     private Database db;
@@ -26,7 +28,8 @@ public class UserService implements UserDetailsService{
 
     @Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		if (username == null || !"root".equals(username)) {
+        log.debug(username);
+		if (username == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
 		} else {
             AppUser tempUser = db.getUser(username);
@@ -37,6 +40,10 @@ public class UserService implements UserDetailsService{
 
     public AppUser getUser(String username){
         return db.getUser(username);
+    }
+
+    public List<AppUser> getAllUsers(){
+        return db.getAllUsers();
     }
 
     public int updateUserScore(String username, Game game){
@@ -51,11 +58,21 @@ public class UserService implements UserDetailsService{
         return db.doesUserExist(username);
     }
 
-    public void createNewUser(String username, String password){
-        db.setUser(username, new AppUser(username, password));
+    public boolean createNewUser(String username, String password){
+        if(!userExists(username)){
+            db.setUser(username, new AppUser(username, password));
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void createNewUser(AppUser user){
-        db.setUser(user.getUsername(), user);
+    public boolean createNewUser(AppUser user){
+        if(!userExists(user.getUsername())){
+            db.setUser(user.getUsername(), user);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

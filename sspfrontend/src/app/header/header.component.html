@@ -8,6 +8,9 @@
       <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-blue-600 ">
         Sign In
       </a>
+      <a *ngIf="loginService.isUserLoggedIn()" class="inline-block text-sm px-4 py-2 text-white">
+        Howdy {{username}}!
+      </a>
       <a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-blue-600">
         Sign Out
       </a>

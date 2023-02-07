@@ -24,7 +24,21 @@ public class Database {
         return database.get(userName);
     }
 
+    public List<AppUser> getAllUsers(){
+        database = FileIO.loadDB();
+        Collection getValues = database.values();
+        Iterator i = getValues.iterator();
+        List<AppUser> allUsers = new ArrayList<>();
+        
+        while (i.hasNext()) {
+            allUsers.add((AppUser) i.next());
+        }
+
+        return allUsers;
+    }
+
     public List<Leader> getLeaderboard(){
+        database = FileIO.loadDB();
         Collection getValues = database.values();
         Iterator i = getValues.iterator();
         List<Leader> leaderboard = new ArrayList<>();
@@ -53,6 +67,7 @@ public class Database {
     }
 
     public boolean doesUserExist(String userName){
+        database = FileIO.loadDB();
         return database.get(userName) != null;
     }
 

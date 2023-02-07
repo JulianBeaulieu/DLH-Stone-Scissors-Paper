@@ -28,7 +28,7 @@ public class GameController {
     @GetMapping("/playGame")
     public Game getPlayGame(@RequestParam String username, @RequestParam String playerChoice){
         log.info("Playing new game. User chose: " + playerChoice);
-        String[] options = {"stone", "scissors", "paper"};
+        String[] options = {"stone", "scisssor", "paper"};
         Random rand = new Random();
         String computerChoice = options[rand.nextInt(options.length)];
         log.info("Computer chose: " + computerChoice);
@@ -37,8 +37,8 @@ public class GameController {
 
         if(playerChoice.equals(computerChoice)){
             outcome = 1;
-        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scissors")) ||
-                    (playerChoice.equals("scissors") && computerChoice.equals("paper"))    ||
+        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scisssor")) ||
+                    (playerChoice.equals("scisssor") && computerChoice.equals("paper"))    ||
                     (playerChoice.equals("paper")    && computerChoice.equals("stone"))   ){
             outcome = 2;
         } else {
@@ -57,7 +57,7 @@ public class GameController {
     @GetMapping("/playGameAnonymous")
     public Game playGame(@RequestParam String playerChoice){
         log.info("Playing new game. User chose: " + playerChoice);
-        String[] options = {"stone", "scissors", "paper"};
+        String[] options = {"stone", "scisssor", "paper"};
         Random rand = new Random();
         String computerChoice = options[rand.nextInt(options.length)];
         log.info("Computer chose: " + computerChoice);
@@ -66,8 +66,8 @@ public class GameController {
 
         if(playerChoice.equals(computerChoice)){
             outcome = 0;
-        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scissors")) ||
-                    (playerChoice.equals("scissors") && computerChoice.equals("paper"))    ||
+        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scisssor")) ||
+                    (playerChoice.equals("scisssor") && computerChoice.equals("paper"))    ||
                     (playerChoice.equals("paper")    && computerChoice.equals("stone"))   ){
             outcome = 1;
         } else {

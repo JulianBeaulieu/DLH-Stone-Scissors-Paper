@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.sspbackend.model.Leader;
 import com.sspbackend.model.AppUser;
@@ -41,8 +42,18 @@ public class UserController {
 		return null;
 	}	
 
-	@GetMapping("/createUser")
-	public void createUser(@RequestBody AppUser user) {
-		this.userService.createNewUser(user);;
+	@CrossOrigin("*")
+    @GetMapping("/allUsers")
+    public List<AppUser> getPlayGame(){
+		return userService.getAllUsers();
+	}	
+
+	@PostMapping("/createUser")
+	public boolean createUser(@RequestParam String username, @RequestParam String password) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(password);
+
+		log.info("NEW USER: " + username + " | " + encodedPassword);
+		return this.userService.createNewUser(new AppUser(username, encodedPassword));
 	}
 }

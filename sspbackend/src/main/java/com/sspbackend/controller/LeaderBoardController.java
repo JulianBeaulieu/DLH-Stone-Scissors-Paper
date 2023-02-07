@@ -10,7 +10,7 @@ import com.sspbackend.model.Leader;
 import com.sspbackend.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "localhost:8080", maxAge = 3600)
+@CrossOrigin()
 public class LeaderBoardController {
     private UserService userService;
 
@@ -18,6 +18,7 @@ public class LeaderBoardController {
         this.userService = userService;
     }
 
+    @CrossOrigin("*")
     @GetMapping(path = "/leaderboard", produces = "application/json")
 	public List<Leader> leaderboard() {
 		return userService.getLeaderboard();
