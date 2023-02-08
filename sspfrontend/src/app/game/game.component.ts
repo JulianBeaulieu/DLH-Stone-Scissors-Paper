@@ -67,7 +67,7 @@ export class GameComponent implements OnInit {
     this.leftIterationCount = 0;
     this.showLeaderboardModal = false;
     this.showWinnerModal = false;
-    this.showHowToModal = false;
+    this.showHowToModal = true;
     this.winnerMessage = "Default Message";
     this.alertMessage = "Woop";
 
