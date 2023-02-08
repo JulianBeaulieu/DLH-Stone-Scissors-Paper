@@ -22,6 +22,8 @@
 
 I just quickly wanted to give you a heads-up that this was made and tested on macOS. Furthermore, this guide will be made for macOS. It should work on Windows, but running the code might be different.
 
+Also, a username and password to test the app is ```username: Anita``` and ```password: password```.
+
 
 ---
 
