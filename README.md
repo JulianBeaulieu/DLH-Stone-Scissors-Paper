@@ -48,6 +48,9 @@ Before you can run the Angular Frontend, you will need to install a bunch of dep
  - What about user storage?
     - Great question! So I first spent about 1 day trying to get a beautiful solution to work using docker, PostgreSQL, and Spring Boot. I then wanted to
     add JWT as a security measure for user auth. Then I remembered that someone needs to run this and maybe actually want to look at the source code. May not have Docker installed, or know how docker works. Hell, I would probably have to publich the container on the docker cloud. It just got too much and I decided to refocus myself on the task at hand. The solution? I use a binary file which I constantly update. Is it a great solution? No. Does it work? Yes. This is why I went with this solution. Ideally, I would host a PostgreSQL server somewhere, and use that as data storage, then I could also nicely log and store usage data and metrics, but that is a bigger task, and I don't have the time for that.
+
+ - What about tests?
+    - So as you can see, there are some test fixtures in the Angular folder. I am not really well versed when it comes to frontend testing, besides maybe checking if a controller returns the correct thing. So I did not really look too much into testing for Angular. Concerning Java, tests were next on my list to do. I am running out of time, so I am going to leave them as a 'next on my list' thing if I have more time. I usually enjoy doing test driven development but I am still new to Spring Boot, so I was happy to just get it up and running. I did import the unit testing framework in Spring Boot because it truly is/was my next step.
 	 
  - What are the assumptions you made?
 	 - Great question. My assumption is that someone knows the basics on how to start a Spring Boot and Angular application. 
