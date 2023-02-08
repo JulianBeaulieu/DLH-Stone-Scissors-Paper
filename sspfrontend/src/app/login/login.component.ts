@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     (this.loginservice.authenticate(this.username, this.password).subscribe(
       data => {
         console.log("Success", this.username, this.password, data);
-        this.router.navigate([''])
+        this.router.navigate([''], { queryParams: { username: this.username } })
         this.invalidLogin = false;
       },
       error => {

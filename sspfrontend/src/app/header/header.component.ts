@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
@@ -9,9 +10,15 @@ import { AuthenticationService } from '../service/authentication.service';
 export class HeaderComponent implements OnInit {
   username:string;
 
-  constructor(public loginService:AuthenticationService){ }
+  constructor(
+    private activatedRoute:ActivatedRoute,
+    public loginService:AuthenticationService
+    ){ }
+
   ngOnInit() {
-    this.username = sessionStorage.getItem('username');
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.username = params['username'];
+    });
   }
 
   ngOnChanges() {

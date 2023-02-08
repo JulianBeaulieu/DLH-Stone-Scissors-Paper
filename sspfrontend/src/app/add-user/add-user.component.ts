@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
       this.httpClientService.createUser(this.username, this.password).subscribe( data => {
         (this.loginservice.authenticate(this.username, this.password).subscribe(
           data => {
-            this.router.navigate([''])
+            this.router.navigate([''], { queryParams: { username: this.username } })
             this.invalidLogin = false
           },
           error => {
