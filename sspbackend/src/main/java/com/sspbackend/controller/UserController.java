@@ -42,11 +42,12 @@ public class UserController {
 		return null;
 	}	
 
-	@CrossOrigin("*")
-    @GetMapping("/allUsers")
-    public List<AppUser> getPlayGame(){
-		return userService.getAllUsers();
-	}	
+	//For dev purposes only, VERY DANGEROUS. REVEALS ALL SECRETS
+	// @CrossOrigin("*")
+    // @GetMapping("/allUsers")
+    // public List<AppUser> getPlayGame(){
+	// 	return userService.getAllUsers();
+	// }	
 
 	@PostMapping("/createUser")
 	public boolean createUser(@RequestParam String username, @RequestParam String password) {

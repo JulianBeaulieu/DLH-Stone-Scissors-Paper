@@ -135,14 +135,14 @@ export class GameComponent implements OnInit {
   }
 
   handleSuccessfulUserResponse(response:User){
-      this.user=response;
+    this.user=response;
   }
 
   handleSuccessfulUsersResponse(response:User[]){
-      this.users=response;
-      this.users.sort((a, b) => {
-        return parseInt(b.score) - parseInt(a.score);
-      });
+    this.users=response;
+    this.users.sort((a, b) => {
+      return parseInt(b.score) - parseInt(a.score);
+    });
   }
 
   textToEmoji(selection){

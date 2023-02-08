@@ -13,12 +13,17 @@ import com.sspbackend.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @RestController
 @Slf4j
 @CrossOrigin()
 @RequestMapping({ "game" })
 public class GameController {
     private UserService userService;
+
+    public static final String SCISSOR = "scissor";
+    public static final String STONE = "stone";
+    public static final String PAPER = "paper";
 
     public GameController(UserService userService){
         this.userService = userService;
@@ -28,7 +33,7 @@ public class GameController {
     @GetMapping("/playGame")
     public Game getPlayGame(@RequestParam String username, @RequestParam String playerChoice){
         log.info("Playing new game. User chose: " + playerChoice);
-        String[] options = {"stone", "scisssor", "paper"};
+        String[] options = {STONE, SCISSOR, PAPER};
         Random rand = new Random();
         String computerChoice = options[rand.nextInt(options.length)];
         log.info("Computer chose: " + computerChoice);
@@ -37,9 +42,9 @@ public class GameController {
 
         if(playerChoice.equals(computerChoice)){
             outcome = 1;
-        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scisssor")) ||
-                    (playerChoice.equals("scisssor") && computerChoice.equals("paper"))    ||
-                    (playerChoice.equals("paper")    && computerChoice.equals("stone"))   ){
+        } else if(  (playerChoice.equals(STONE)    && computerChoice.equals(SCISSOR)) ||
+                    (playerChoice.equals(SCISSOR) && computerChoice.equals(PAPER))    ||
+                    (playerChoice.equals(PAPER)    && computerChoice.equals(STONE))   ){
             outcome = 2;
         } else {
             outcome = 0;
@@ -57,7 +62,7 @@ public class GameController {
     @GetMapping("/playGameAnonymous")
     public Game playGame(@RequestParam String playerChoice){
         log.info("Playing new game. User chose: " + playerChoice);
-        String[] options = {"stone", "scisssor", "paper"};
+        String[] options = {STONE, SCISSOR, PAPER};
         Random rand = new Random();
         String computerChoice = options[rand.nextInt(options.length)];
         log.info("Computer chose: " + computerChoice);
@@ -65,13 +70,13 @@ public class GameController {
         int outcome = -100;
 
         if(playerChoice.equals(computerChoice)){
-            outcome = 0;
-        } else if(  (playerChoice.equals("stone")    && computerChoice.equals("scisssor")) ||
-                    (playerChoice.equals("scisssor") && computerChoice.equals("paper"))    ||
-                    (playerChoice.equals("paper")    && computerChoice.equals("stone"))   ){
             outcome = 1;
+        } else if(  (playerChoice.equals(STONE)    && computerChoice.equals(SCISSOR)) ||
+                    (playerChoice.equals(SCISSOR) && computerChoice.equals(PAPER))    ||
+                    (playerChoice.equals(PAPER)    && computerChoice.equals(STONE))   ){
+            outcome = 2;
         } else {
-            outcome = -1;
+            outcome = 0;
         }
 
         log.info("Outcome of the game: " + outcome + "\n\n");

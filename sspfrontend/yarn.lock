@@ -4792,6 +4792,13 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-device-detector@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-device-detector/-/ngx-device-detector-5.0.1.tgz#da511f0393fff7dab45a3dfa72d40981c5e81e3c"
+  integrity sha512-hVKaGzyXzy6zeliYyN7runz3eOOsh3tmZ8A6P5MSpHIjVjSx3pUJcobFTKNyHGn/zGS4JFWuhSSb7QmNwmqK9w==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/nice-napi/-/nice-napi-1.0.2.tgz"
